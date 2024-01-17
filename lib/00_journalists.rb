@@ -42,3 +42,22 @@ my_hash.each do |handle,count|
 end
   
 puts "Il y a #{five_crt_count} handle contenant 5 caracteres, @exclut"
+
+#Cherche de handle commence par une majuscule ?
+#Supprime @
+a=[]
+my_array.each do |handle|
+
+  a << handle.tr('@','')
+
+end
+
+#Vérifier si le text=text.capitalize
+maj_count = 0
+a.each do |nom|
+  if nom == nom.capitalize
+    maj_count += 1
+  end
+end
+
+puts "Il y a #{maj_count} handle dont le premier lettre commence par une majuscule @exclut"
