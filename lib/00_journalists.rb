@@ -150,7 +150,7 @@ def ask_questions(my_array)
     # puts "Il y y handle avec 2 caracteres"
     
   else 
-    puts "Tu n'a pas saisie la bonne valeur"
+    puts "Tu n'a pas saisie la bonne valeur, bah je ne répondrai pas aux questions"
   end
 
 end
