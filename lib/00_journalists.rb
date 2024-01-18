@@ -33,24 +33,18 @@ def five_crt_count(my_array)
   return five_crt
 end
 
-#question 8
 
-def five_crt_count1(my_array)
+#question 8
+def five_crt_count1(array_witout_at)
   five_crt = 0
   34.times do |i|
-    my_array.each do |handle|
-    long = handle.length
-
-    if long == i
-      five_crt += 1
-    end
-    end
+    five_crt = array_witout_at.count{|handle| handle.length == i}
     puts "--> R : Il y a #{five_crt} handle contenant #{i} caracteres, @exclut" 
   end
   
   return five_crt
 end
-# five_crt_count1(my_array)
+
 
 #tri par ordre alphabétique
 def array_sorting(my_array)
@@ -73,8 +67,8 @@ def delete_at(my_array)
   array_witout_at=[]
   my_array.each do |handle|
     array_witout_at << handle.tr('@','')
+        
   end
-  
   return array_witout_at
 end
 #split les lettre de chaque mot
@@ -82,77 +76,89 @@ def find_first_letter(array_witout_at)
   count = 0
   array_witout_at.each do |handle_without_at|
     first_letter = handle_without_at.chars.first #chars permet de diviser les mot en tableau et first permet de ne selectionner que la premiere lettre
-    if first_letter == first_letter.upcase #Vérifier si la premiere lettre est égale à la premiere lettre en majuscule
-      count += 1
+    if first_letter != "_"
+      if first_letter == first_letter.upcase#Vérifier si la premiere lettre est égale à la premiere lettre en majuscule
+        count += 1
+      end
     end
   end
   puts " --> R : Il y a #{count} handle dont le premier lettre commence par une majuscule avec @exclut"
   return count
 end
+ 
 
+# #répartition des handle par taille de ces derniers
+# #creation de hash
+# def creat_hash(my_array)
+#   my_hash=Hash.new(0)
+#   my_array.each do |handle|
+#     my_hash[handle] += 1
 
-#répartition des handle par taille de ces derniers
-#creation de hash
-def creat_hash(my_array)
-  my_hash=Hash.new(0)
-  my_array.each do |handle|
-    my_hash[handle] += 1
-
-  end
+#   end
   
-  return my_hash
-end
+#   return my_hash
+# end
 
-#restocker le nombre de lettre comme valeur dans le hash
-def restock(my_hash)
-  my_hash.each do |handle,count|
-    my_hash[handle]= handle.length
-  end
-  puts my_hash.inspect
-  return my_hash
-end
+# #restocker le nombre de lettre comme valeur dans le hash
+# def restock(my_hash)
+#   my_hash.each do |handle,count|
+#     my_hash[handle]= handle.length
+#   end
+#   puts my_hash.inspect
+#   return my_hash
+# end
 
 #question-reponse
 
 def ask_questions(my_array)
-
+  answer = 10
   puts "Salut, que veux tu savoir ?"
-  puts "Rentre le chiffre --1-- pour connaitre : Combien y a-t-il de handle dans cette array ?"
-  puts "Rentre le chiffre --2-- pour connaitre : Quel est le handle le plus court de cette liste ?"
-  puts "Rentre le chiffre --3-- pour connaitre : Combien y-a-t'il de handle contenant 5 caractères (le @ ne compte pas pour un caractère)"
-  puts "Rentre le chiffre --4-- pour connaitre : Combien commencent par une majuscule (première lettre juste après le @) ?"
-  puts "Rentre le chiffre --5-- pour : Trie la liste de handle par ordre alphabétique."
-  puts "Rentre le chiffre --6-- pour : Trie la liste de handle par taille des handle (les plus petits en premiers, les plus grands après)"
-  puts "Rentre le chiffre --7-- pour connaitre : Quelle est la position dans l'array de la personne @epenser ?"
-  puts "Rentre le chiffre --8-- pour : Sors-moi une répartition des handle par taille de ces derniers"
-  print "> "
-  answer = gets.chomp.to_i
-  
-  if answer == 1
-    array_lengh(my_array)
-  elsif answer == 2
-    shortest_handle(my_array)
-  elsif answer == 3
-    five_crt_count(my_array)
-  elsif answer == 4
-    array_witout_at = delete_at(my_array)
-    find_first_letter(array_witout_at)
-  elsif answer == 5
-    array_sorting(my_array)
-  elsif answer == 6
-    array_sorting_length(my_array)
-  elsif answer == 7
-    find_position(my_array)
-  elsif answer == 8
-    # my_hash=creat_hash(my_array)
-    # restock(my_hash)
-    # puts "Il y x handle avec 1 caracteres"
-    # puts "Il y y handle avec 2 caracteres"
+  while answer != 0
     
-  else 
-    puts "Tu n'a pas saisie la bonne valeur, bah je ne répondrai pas aux questions"
+    puts "Rentre le chiffre --1-- pour connaitre : Combien y a-t-il de handle dans cette array ?"
+    puts "Rentre le chiffre --2-- pour connaitre : Quel est le handle le plus court de cette liste ?"
+    puts "Rentre le chiffre --3-- pour connaitre : Combien y-a-t'il de handle contenant 5 caractères (le @ ne compte pas pour un caractère)"
+    puts "Rentre le chiffre --4-- pour connaitre : Combien commencent par une majuscule (première lettre juste après le @) ?"
+    puts "Rentre le chiffre --5-- pour : Trie la liste de handle par ordre alphabétique."
+    puts "Rentre le chiffre --6-- pour : Trie la liste de handle par taille des handle (les plus petits en premiers, les plus grands après)"
+    puts "Rentre le chiffre --7-- pour connaitre : Quelle est la position dans l'array de la personne @epenser ?"
+    puts "Rentre le chiffre --8-- pour : Sors-moi une répartition des handle par taille de ces derniers"
+    puts "appui sur 0 pour quitter"
+    print "> "
+    answer = gets.chomp.to_i
+    
+    if answer == 1
+      array_lengh(my_array)
+      puts "T'es content ?"
+    elsif answer == 2
+      shortest_handle(my_array)
+      puts "T'es content ?"
+    elsif answer == 3
+      five_crt_count(my_array)
+      puts "T'es content ?"
+    elsif answer == 4
+      array_witout_at = delete_at(my_array)
+      find_first_letter(array_witout_at)
+      puts "T'es content ?"
+    elsif answer == 5
+      array_sorting(my_array)
+      puts "T'es content ?"
+    elsif answer == 6
+      array_sorting_length(my_array)
+      puts "T'es content ?"
+    elsif answer == 7
+      find_position(my_array)
+      puts "T'es content ?"
+    elsif answer == 8
+      array_witout_at = delete_at(my_array)
+      five_crt_count1(array_witout_at)
+      puts "T'es content ?"
+    
+    else 
+      puts "Tu n'a pas saisie la bonne valeur, bah je ne répondrai pas aux questions"
+    end
+    puts "--------------------------------"
   end
-
 end
 
 ask_questions(my_array)
