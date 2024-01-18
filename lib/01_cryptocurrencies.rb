@@ -15,8 +15,9 @@ blockchain_hash = Hash[key_array.zip(float_value_array)]
 sorted_hash = blockchain_hash.sort_by{|key,value|value}
 
 #recupere les crypto qui ont la plus grosse valeur
-last_value = sorted_hash.last(3)
-puts "Les 3 cryptos qui ont la plus grosse valeur sont : #{last_value[0][0]} avec #{last_value[0][1]}, #{last_value[1][0]} avec #{last_value[1][1]} et #{last_value[2][0]} avec #{last_value[2][1]}"
+
+highest_value = sorted_hash.max_by(3){|key,value|value}
+puts "Les 3 cryptos qui ont la plus grosse valeur sont : #{highest_value[0][0]} avec #{highest_value[0][1]}, #{highest_value[1][0]} avec #{highest_value[1][1]} et #{highest_value[2][0]} avec #{highest_value[2][1]}"
 
 #recupere les crypto qui ont la plus petite valeur
 first_value = sorted_hash.first(3)
@@ -28,25 +29,44 @@ puts "Les crypto qui ont la plus petite valeur sont : #{first_value[0][0]} avec 
 six_thousand = {}
 
 def find_inf_6000(sorted_hash,six_thousand)
-  puts "Voici la liste des noms dont le cours est inférieur à 6000 : " 
+  
   sorted_hash.each do |key,value|
     if value < 6000
-      
-      print key
-      
+      # print key
       six_thousand[key]=value
-      
     end
-  print ", "
-
   end
-  puts ""
   return six_thousand
 
 end
-
-find_inf_6000(sorted_hash,six_thousand)
+six_thousand = find_inf_6000(sorted_hash,six_thousand)
+six_thousand_array = six_thousand.keys
+six_thousand_list=six_thousand_array.join(" , ")
+puts "Voici la liste des noms dont le cours est inférieur à 6000 : #{six_thousand_list}" 
+# find_inf_6000(sorted_hash,six_thousand)
 
 #La devise la plus chère parmi celles dont le cours est inférieur à 6000.
+max_value = six_thousand.max_by{|key,value| value}
+puts "La devise la plus chère parmi celles dont le cours est inférieur à 6000 est : #{max_value}"
 
-puts "La devise la plus chère parmi celles dont le cours est inférieur à 6000 est : #{six_thousand.max_by{|key,value| value}} "
+# Def ask_questions
+#   puts "Salut, que veux tu savoir ?"
+#   puts "Rentre le chiffre --1-- pour connaitre : La ou les crypto qui ont la plus grosse valeur."
+#   puts "Rentre le chiffre --2-- pour connaitre: La ou les crypto qui ont la plus petite valeur."
+#   puts "Rentre le chiffre --3-- pour connaitre: Les devises dont le cours est inférieur à 6000"
+#   puts "Rentre le chiffre --4-- pour connaitre: La devise la plus chère parmi celles dont le cours est inférieur à 6000."
+#   answer = get.chomp
+    
+#   if answer == 1
+      
+#   elsif answer == 2
+
+#   elsif answer == 3
+
+#   elsif answer == 4
+
+#   else 
+#     puts "Tu n'a pas saisie la bonne valeur"
+#   end
+
+# end
